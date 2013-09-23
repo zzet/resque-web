@@ -1,16 +1,23 @@
 module ResqueWeb
   module ApplicationHelper
-
     PER_PAGE = 20
 
+    class << self
+      attr_accessor :tabs
+
+      def tabs
+        @tabs ||= {'overview' => :overview,
+                   'working'  => :working_index,
+                   'failures' => :failures,
+                   'queues' => :queues,
+                   'workers' => :workers,
+                   'stats' => :stats
+                  }
+      end
+    end
+
     def tabs
-      {'overview' => overview_path,
-       'working'  => working_index_path,
-       'failures' => failures_path,
-       'queues' => queues_path,
-       'workers' => workers_path,
-       'stats' => stats_path
-      }
+      ResqueWeb::ApplicationHelper.tabs
     end
 
     def tab(name,path)
