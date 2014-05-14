@@ -9,14 +9,14 @@ module ResqueWeb
     def resque
       respond_to do |format|
         format.html
-        format.json { render json: Hash[Resque.info.sort] }
+        format.json { render json: Hash[Resque::WorkerRegistry.redis.info.sort] }
       end
     end
 
     def redis
       respond_to do |format|
         format.html
-        format.json { render json: Hash[Resque.redis.info.sort] }
+        format.json { render json: Hash[Resque::WorkerRegistry.redis.info.sort] }
       end
     end
 

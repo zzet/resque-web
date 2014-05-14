@@ -4,7 +4,7 @@ module ResqueWeb
       @worker_hosts ||= begin
         hosts = Hash.new { [] }
 
-        Resque.workers.each do |worker|
+        Resque::WorkerRegistry.all.each do |worker|
           host, _ = worker.to_s.split(':')
           hosts[host] += [worker.to_s]
         end

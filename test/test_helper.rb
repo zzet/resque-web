@@ -9,7 +9,6 @@ require File.expand_path('../dummy/config/environment', __FILE__)
 require 'rails/test_help'
 
 require 'minitest/spec'
-require 'resque'
 require 'mocha/setup'
 
 Rails.backtrace_cleaner.remove_silencers!
