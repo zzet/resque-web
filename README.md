@@ -6,12 +6,12 @@ resque-web
 [![Code Climate](https://img.shields.io/codeclimate/github/resque/resque-web.svg)](https://codeclimate.com/github/resque/resque-web)
 [![Coverage Status](https://img.shields.io/coveralls/resque/resque-web/master.svg)](https://coveralls.io/r/resque/resque-web)
 
-# :caution: RESQUE-2 BRANCH :caution:
+# :warning: RESQUE-2 BRANCH :warning:
 
 This branch is for resque 2.0! It won't work with resque 1-x. Please file all
 pull requests for resque 2.0 compatibility for this branch.
 
-# :caution: :caution: :caution:
+:construction: :construction: :construction:
 
 A Rails-based frontend to the [Resque](https://github.com/resque/resque) job
 queue system. This provides a similar interface to the existing Sinatra
