@@ -1,5 +1,5 @@
   <h1>Keys owned by <%= Resque %></h1>
-  <p class="sub">(All keys are actually prefixed with "<%= Resque.redis.namespace %>:")</p>
+  <p class="sub">(All keys are actually prefixed with "<%= Resque::WorkerRegistry.redis.namespace %>:")</p>
 
   <table class="table table-bordered stats">
     <tr>

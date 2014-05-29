@@ -24,8 +24,12 @@ module ResqueWeb
 
     describe "GET /resque.json" do
       it "renders the resque page" do
+        expected = Resque::WorkerRegistry.redis.info
+
+        Resque::WorkerRegistry.redis.stubs(:info).returns(expected)
+
         visit(:resque, format: 'json')
-        assert_equal response.body, Hash[Resque.info.sort].to_json
+        assert_equal response.body, Hash[expected.sort].to_json
       end
     end
 
@@ -38,9 +42,12 @@ module ResqueWeb
 
     describe "GET /redis.json" do
       it "renders the redis page" do
-        expected = Resque.redis.info
-        Resque.redis.stubs(:info).returns(expected)
+        expected = Resque::WorkerRegistry.redis.info
+
+        Resque::WorkerRegistry.redis.stubs(:info).returns(expected)
+
         visit(:redis, format: 'json')
+
         assert_equal response.body, Hash[expected.sort].to_json
       end
     end

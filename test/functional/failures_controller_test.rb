@@ -38,6 +38,7 @@ module ResqueWeb
         assert_redirected_to failures_path
       end
       it "retries should work also in case of pre 2.0 Resque" do
+        Resque::Failure.stubs(:respond_to?).with(:requeue_and_remove).returns(false)
         Resque::Failure.expects(:requeue).with('123')
         Resque::Failure.expects(:remove).with('123')
         visit(:retry, {:id => 123}, :method => :put)
@@ -55,6 +56,7 @@ module ResqueWeb
         assert_redirected_to failures_path
       end
       it "retries all failures should also work case of pre 2.0 Resque" do
+        Resque::Failure.stubs(:respond_to?).with(:requeue_and_remove).returns(false)
         Resque::Failure.stubs(:count).returns(2)
         Resque::Failure.stubs(:requeue).returns(true)
         Resque::Failure.expects(:requeue).with(0)

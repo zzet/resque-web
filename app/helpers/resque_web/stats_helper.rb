@@ -5,11 +5,11 @@ module ResqueWeb
     end
 
     def redis_info
-      Resque.redis.info.to_a.sort_by { |i| i[0].to_s }
+      Resque::WorkerRegistry.redis.info.to_a.sort_by { |i| i[0].to_s }
     end
 
     def redis_key_type(key)
-      Resque.redis.type(key)
+      Resque::WorkerRegistry.redis.type(key)
     end
 
     def redis_key_size(key)
@@ -19,14 +19,14 @@ module ResqueWeb
       when 'none'
         0
       when 'list'
-        Resque.redis.llen(key)
+        Resque::WorkerRegistry.redis.llen(key)
       when 'set'
-        Resque.redis.scard(key)
+        Resque::WorkerRegistry.redis.scard(key)
       when 'string'
-        string = Resque.redis.get(key)
+        string = Resque::WorkerRegistry.redis.get(key)
         string ? string.length : 0
       when 'zset'
-        Resque.redis.zcard(key)
+        Resque::WorkerRegistry.redis.zcard(key)
       end
     end
 
@@ -35,15 +35,15 @@ module ResqueWeb
       when 'none'
         []
       when 'list'
-        Resque.redis.lrange(key, start, start + 20)
+        Resque::WorkerRegistry.redis.lrange(key, start, start + 20)
       when 'set'
-        Resque.redis.smembers(key)[start..(start + 20)]
+        Resque::WorkerRegistry.redis.smembers(key)[start..(start + 20)]
       when 'string'
-        [Resque.redis.get(key)]
+        [Resque::WorkerRegistry.redis.get(key)]
       when 'zset'
-        Resque.redis.zrange(key, start, start + 20)
+        Resque::WorkerRegistry.redis.zrange(key, start, start + 20)
       when 'hash'
-        Resque.redis.hgetall(key)
+        Resque::WorkerRegistry.redis.hgetall(key)
       end
     end
 

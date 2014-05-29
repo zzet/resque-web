@@ -14,6 +14,6 @@
     <% end %>
     <tr class="failed">
       <td class="queue failed"><%= link_to "all workers", worker_path('all'), :class => 'queue' %></td>
-      <td class="size"><%= Resque.workers.size %></td>
+      <td class="size"><%= Resque::WorkerRegistry.all.size %></td>
     </tr>
   </table>
