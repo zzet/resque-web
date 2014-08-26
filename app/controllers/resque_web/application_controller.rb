@@ -2,6 +2,7 @@ module ResqueWeb
   class ApplicationController < ActionController::Base
     protect_from_forgery
     before_filter :set_subtabs, :authorize
+    layout 'resque_web/application'
 
     helper :all
 
